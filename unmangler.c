@@ -56,6 +56,9 @@ int main(int argc, char** argv) {
             } else if (KW) {
                 printf("\033[35m%.*s\033[0m", i, name);
                 name += i;
+            } else if (!strncmp(name, "lambda", 6)) {
+                printf("\033[32m%.6s\033[0m", name);
+                name += 6;
             } else if (*name == '*') {
                 printf("\033[31m%c\033[0m", *name);
                 ++name;

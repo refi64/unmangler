@@ -11,7 +11,7 @@ That's more readable...a little...
 
 With unmangler, that turns into:
 
-.. image:: http://s5.postimg.org/lyef55sxz/unmangler.png
+.. image:: http://s5.postimg.org/ds07it70n/unmangler2.png
 
 That's better!
 

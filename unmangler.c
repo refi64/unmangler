@@ -78,18 +78,19 @@ int main(int argc, char** argv) {
                 ln();
             } else if (*name == '>') {
                 putchar('>');
+                --ind;
                 if (*(name+1) == ' ') {
                     putchar(' ');
                     ++name;
                 }
                 if (*++name == '>') while (*name == '>') {
                     putchar('>');
+                    --ind;
                     if (*++name == ' ') {
                         putchar(' ');
                         ++name;
                     }
-                    --ind;
-                } else --ind;
+                }
                 if (*name == ',') {
                     putchar(',');
                     if (*++name == ' ') ++name;

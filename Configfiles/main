@@ -1,9 +1,0 @@
-SRCDIR = .
-
-LANGUAGES += c
-COMPILEOPTS += -Wno-logical-op-parentheses
-
-CONFIG += flags
-
-BINARIES += unmangler
-SOURCES += unmangler.c

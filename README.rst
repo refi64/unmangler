@@ -11,26 +11,27 @@ That's more readable...a little...
 
 With unmangler, that turns into:
 
-.. image:: http://s5.postimg.org/ds07it70n/unmangler2.png
+.. image:: http://s17.postimg.org/ccoxk6uf3/unmangler_c.png
 
 That's better!
 
 Building
 ********
 
-You need `pconfigure <https://github.com/palmer-dabbelt/pconfigure/>`_ installed. If you get weird errors where make complains about ``cxxabi.h`` being nonexistent, try `this fork <https://github.com/kirbyfan64/pconfigure>`_. Just run::
+You need `Fbuild <https://github.com/felix-lang/fbuild/>`_ installed FROM GIT. Just run::
    
-   $ pconfigure
+   $ fbuild
 
-Followed by::
+Installing
+**********
+
+::
    
-   $ make
+   $ fbuild install
 
 Usage
 *****
 
-Just run ``bin/unmangler`` with the mangled name, and it will output a nice, color-coded representation, like::
+Just run ``build/unmangler`` with the mangled name, and it will output a nice, color-coded representation, like::
    
-   bin/unmangler St6vectorIS_ISt4pairIiPcESaIS2_EESaIS4_EE
-
-You can also run ``make install`` to install unmangler.
+   build/unmangler St6vectorIS_ISt4pairIiPcESaIS2_EESaIS4_EE

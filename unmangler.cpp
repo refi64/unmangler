@@ -2,13 +2,16 @@
 #include <cxxabi.h>
 #include <iostream>
 #include <string>
+#ifdef USE_RE2
+#include <re2/re2.h>
+using Regex = RE2;
+#else
 #include <regex>
+using Regex = std::regex;
+#endif
 
-using std::regex_search;
 using std::advance;
 using std::string;
-using std::smatch;
-using std::regex;
 using std::stoi;
 using std::cout;
 
@@ -60,6 +63,18 @@ int main(int argc, char** argv) {
         cout << '\n';
         for (int i=0; i<ind; ++i) cout << "  ";
     };
+    string rm; // regex match
+    auto match = [&](const Regex& re) {
+        #ifdef USE_RE2
+        re2::StringPiece p{name.c_str()+pos};
+        return RE2::PartialMatch(p, re, &rm);
+        #else
+        std::smatch sm;
+        bool res = std::regex_search(name.cbegin()+pos, name.cend(), sm, re);
+        if (res) rm = sm[1];
+        return res;
+        #endif
+    };
     string
         c_reset{"\033[0m"},
         c_char{"\033[36m"},
@@ -68,8 +83,7 @@ int main(int argc, char** argv) {
         c_lambda{"\033[32m"},
         c_ptr{"\033[31m"},
         c_ns{"\033[33m"};
-    regex kw{"^(int|char|std|unsigned|long|short)"};
-    smatch rm; // This is a really disturbing variable name...
+    Regex kw{"^(int|char|std|unsigned|long|short)"};
     while (pos < name.length()) {
         if (startswith("(char)")) {
             pos += 6;
@@ -83,9 +97,9 @@ int main(int argc, char** argv) {
                 cout << chr(0);
                 ++pos;
             }
-        } else if (regex_search(name.cbegin()+pos, name.cend(), rm, kw)) {
-            cout << c_kw << rm[1];
-            pos += rm[1].length();
+        } else if (match(kw)) {
+            cout << c_kw << rm;
+            pos += rm.length();
         } else if (startswith("lambda")) {
             cout << c_lambda << "lambda";
             pos += 6;

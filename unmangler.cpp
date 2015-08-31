@@ -100,7 +100,7 @@ int main(int argc, char** argv) {
         } else if (match(kw)) {
             cout << c_kw << rm;
             pos += rm.length();
-        } else if (startswith("lambda")) {
+        } else if (word("lambda")) {
             cout << c_lambda << "lambda";
             pos += 6;
         } else if (chr(0) == '*') {
